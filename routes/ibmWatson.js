@@ -3,7 +3,7 @@ var roteador = express.Router();
 
 // recupera configurações de acesso aos serviços IBM Watson
 const ibmWatson = require('../lib/credenciaisIBMWatson');
-const idWatson = '8db28d5c-ef5c-4ad5-837a-ff8998fa245c';
+const idHabilidade = 'caa2f366-79b5-432f-8152-8569d6195d99';
 
 // post para o serviço: IBM Watson Assistant
 roteador.post('/assistente', function (req, res, next) {
@@ -14,7 +14,7 @@ roteador.post('/assistente', function (req, res, next) {
   // constrói JSON para envio dos dados ao serviço
   const parametros = {
     input: { text: texto },
-    workspaceId: idWatson,
+    workspaceId: idHabilidade,
     context: contexto
   };
 
