@@ -1,0 +1,35 @@
+body {
+  background-color: orange;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  height: 50vh;
+}
+
+a {
+  color: #00B7FF;
+}
+
+section#assistente {
+  padding: 50px;
+  min-width: 100px;
+  height: 100%;
+  text-align: center;
+}
+
+section#bate-papo {
+  overflow: auto;
+  height: 100%;
+  text-align: left;
+}
+
+form#formularioBatePapo {
+  width: auto;
+}
+
+input.texto {
+  width: 80%;
+  min-width: 50px;
+}
+
+input.botão {
+  width: 50px;
+}

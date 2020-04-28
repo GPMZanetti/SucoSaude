@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset = "utf-8">
+        <meta name = "viewport" content = "width=device-width,inicial-scale=1.0">
+        <title>SucoSaúde - Atendimento</title>
+        <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src = "/javascripts/ibmWatson.js"></script>
+        <link rel = "stylesheet" type="text/css" href="stylesheets/estilo.css"  title="Estilo 1">
+    </head>
+
+    <body>
+        <section id = "assistente">
+            <h1>Peça seu suco com o Laranjinha</h1>
+            <section id = "bate-papo"></section>
+            <br>
+            <form name = "formularioBatePapo" method = "post">
+                <input class="texto" type = "text" name = "mensagemDeTexto" />
+                <input class="botão" type = "button" onclick = "enviarMensagemAoAssistente();" value = "Enviar" />
+            </form>
+        </section>
+    </body>
+</html>
