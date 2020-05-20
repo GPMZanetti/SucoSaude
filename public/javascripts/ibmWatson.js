@@ -29,7 +29,27 @@ function enviarMensagemAoAssistente() {
             else {
                 // exibe retorno da API e recupera o contexto para o próximo diálogo
                 dadosRetornados.data.result.output.text.forEach(elemento => {
-                    batePapo.innerHTML += '<p>Laranjinha -> ' + elemento + '</p>';
+                    if (elemento.charAt(0) == '%') {
+                        $.post("/cos/guardar",
+                            { 
+                                mensagem: elemento,
+                                pedido: dadosRetornados.data.result.context.pedido,
+                                cliente: dadosRetornados.data.result.context.cliente,
+                            },
+                            function (dadosRetornados, statusRequest) {
+                                if (dadosRetornados.status === 'OK') {
+                                    $.get("/cos/preco",
+                                        { pedido: dadosRetornados.data },
+                                        function (dadosRetornados, statusRequest) {
+                                            batePapo.innerHTML += '<p>Laranjinha -> O valor do pedido é ' + dadosRetornados.data.preco + '</p>';
+                                        }
+                                    )
+                                }
+                            }
+                        );
+                    }
+                    else
+                        batePapo.innerHTML += '<p>Laranjinha -> ' + elemento + '</p>';
                 });
                 contextoDoDialogo = JSON.stringify(dadosRetornados.data.result.context);
             }
