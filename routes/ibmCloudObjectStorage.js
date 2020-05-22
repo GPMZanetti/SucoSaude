@@ -5,17 +5,19 @@ const cos = require("../lib/IBMCloudObjectStorage");
 
 roteador.post('/guardar', function (req, res, next) {
     var pedido = {
-        id: Math.random().toString(36),
+        id: Math.floor(Math.random()*1000000000),
         cliente: req.body.cliente,
         situacao: "fazendo",
-        itens: new [],
+        itens: [],
     }
 
     var quantItens = 0;
-    var vetorPedido = req.body.pedido.split(",");
+    var vetorPedido = req.body.pedido.split(", ");
+    // retirar espaço do primeiro suco do pedido
+    vetorPedido[0] = vetorPedido[0].substring(1);
 
     vetorPedido.forEach(elemento => {
-        var vetorItem = elemento.split(" ");
+        var vetorItem = elemento.split(" com ");
         var item = {
             suco: vetorItem[0],
             adicional: vetorItem[1],
@@ -24,36 +26,33 @@ roteador.post('/guardar', function (req, res, next) {
 
         quantItens++;
     });
-
-    cos.enviarItem("bd-sucosaude-cos-standard", pedido.id, pedido);
+    
+    cos.enviarItem("bd-sucosaude-cos-standard", pedido.id + ".json", JSON.stringify(pedido));
 
     res.json({
         "status": "OK",
         "data": pedido,
-    })
+    });
 });
 
-roteador.post('/preco', function (req, res, next) {
-    var pedido = req.body.pedido;
+roteador.get('/preco', function (req, res, next) {
+    var pedido = req.query.pedido;
     var arquivo;
     var preco = 0;
 
-    getItem("bd-sucosaude-cos-standard", "cardapio.json", (dados) => {
-        if (dados != null) {
+    cos.getItem("bd-sucosaude-cos-standard", "cardapio.json", (dados) => {
+        if (dados != null)
             arquivo = Buffer.from(dados.Body).toString();
-        }
     }).then(() => {
         var cardapio = JSON.parse(arquivo);
         pedido.itens.forEach(item => {
             cardapio.sucos.nomes.forEach((suco, indice) => {
-                if (suco == item.suco) {
+                if (suco == item.suco)
                     preco += cardapio.sucos.valores[indice];
-                }
             });
             cardapio.adicionais.nomes.forEach((adicional, indice) => {
-                if (adicional == item.adicional) {
+                if (adicional == item.adicional)
                     preco += cardapio.adicionais.valores[indice];
-                }
             });
         });
         res.json({
