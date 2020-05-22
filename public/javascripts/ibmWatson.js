@@ -1,5 +1,17 @@
 // variável para controlar o contexto do diálogo
 var contextoDoDialogo = '{}';
+var rolado = false;
+
+function atualizarRolagem(){
+    if(!rolado){
+        var elemento = document.getElementById("bate-papo");
+        elemento.scrollTop = elemento.scrollHeight;
+    }
+}
+
+$("#bate-papo").on('scroll', function() {
+    rolado=true;
+});
 
 function enviarMensagemAoAssistente() {
     // recupera mensagem digitada pelo usuário
@@ -10,8 +22,11 @@ function enviarMensagemAoAssistente() {
     // então define como vazio para dar erro na API
     if (mensagemDeTexto === undefined || mensagemDeTexto === '')
         mensagemDeTexto = '';
-    else // exibe a mensagem na tela
+    else {
+        // exibe a mensagem na tela
         batePapo.innerHTML += '<p>Você -> ' + mensagemDeTexto + '</p>';
+        atualizarRolagem();
+    }
     
     // limpa o campo de entrada
     document.formularioBatePapo.mensagemDeTexto.value = '';
@@ -29,7 +44,35 @@ function enviarMensagemAoAssistente() {
             else {
                 // exibe retorno da API e recupera o contexto para o próximo diálogo
                 dadosRetornados.data.result.output.text.forEach(elemento => {
-                    batePapo.innerHTML += '<p>Laranjinha -> ' + elemento + '</p>';
+                    console.log(elemento);
+                    if (elemento.charAt(0) === '%') {
+                        $.post("/cos/guardar",
+                            { 
+                                mensagem: elemento,
+                                pedido: dadosRetornados.data.result.context.pedido,
+                                cliente: dadosRetornados.data.result.context.cliente,
+                            },
+                            function (dadosRetornados, statusRequest) {
+                                if (dadosRetornados.status === 'OK') {
+                                    $.get("/cos/preco",
+                                        { pedido: dadosRetornados.data },
+                                        function (dadosRetornados, statusRequest) {
+                                            if (dadosRetornados.status === 'ERRO')
+                                                alert(dadosRetornados.data);
+                                            else {
+                                                batePapo.innerHTML += '<p>Laranjinha -> O valor do pedido é R$ ' + parseFloat(dadosRetornados.data).toFixed(2) + '</p>';
+                                                atualizarRolagem();
+                                            }
+                                        }
+                                    )
+                                }
+                            }
+                        );
+                    }
+                    else {
+                        batePapo.innerHTML += '<p>Laranjinha -> ' + elemento + '</p>';
+                        atualizarRolagem();
+                    }
                 });
                 contextoDoDialogo = JSON.stringify(dadosRetornados.data.result.context);
             }
