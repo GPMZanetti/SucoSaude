@@ -44,7 +44,6 @@ function enviarMensagemAoAssistente() {
             else {
                 // exibe retorno da API e recupera o contexto para o próximo diálogo
                 dadosRetornados.data.result.output.text.forEach(elemento => {
-                    console.log(elemento);
                     if (elemento.charAt(0) === '%') {
                         $.post("/cos/guardar",
                             { 
