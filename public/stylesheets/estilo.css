@@ -1,24 +1,32 @@
 body {
-  background-color: orange;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   height: 50vh;
-}
-
-a {
-  color: #00B7FF;
+  size: 50vh;
+  background-image: url('https://image.freepik.com/fotos-gratis/fronteira-de-laranjas-e-folhas_23-2147931397.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 section#assistente {
   padding: 50px;
-  min-width: 100px;
-  height: 100%;
+  width: 50%;
+  height: 90%;
   text-align: center;
+  float: left;
 }
 
 section#bate-papo {
   overflow: auto;
   height: 100%;
   text-align: left;
+  background-color: white;
+  opacity: 50%;
+  border-width: 3px;
+  border-style: solid;
+  border-radius: 5px;
+  font-weight: bolder;
+  padding: 10px;
 }
 
 form#formularioBatePapo {
@@ -30,6 +38,94 @@ input.texto {
   min-width: 50px;
 }
 
-input.botão {
-  width: 50px;
+aside#cardapio {
+  position: relative;
+  float: right;
+  margin-top: 0px;
+  height: 100%;
+}
+
+img#imagemCardapio {
+  height: 190%;
+}
+
+section#pedidos{
+  float: left;
+  border-color: orangered;
+  border-width: 3px;
+  border-style: solid;
+  border-radius: 20px;
+  background-color: white;
+}
+
+button#mostraPedido {
+  border-radius: inherit;
+  font-size: 2em;
+  cursor: pointer;
+  border-style: solid;
+  background-color: inherit;
+}
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: whitesmoke;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: orangered;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+section#principal {
+  height: 100%;
+}
+
+input#botaoEnviar {
+  border-radius: 20px;
+  cursor: pointer;
+  border-style: solid;
+  border-color: orangered;
+  background-color: white;
+  font-weight: bold;
+  width: 60px;
+}
+
+p.laranjinha {
+  color: orangered;
+}
+
+p.voce {
+  color: darkgreen;
+}
+
+h2 {
+  text-align: center;
+}
+
+p.pedido {
+  text-align: center;
 }
