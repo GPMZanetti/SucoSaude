@@ -9,6 +9,16 @@ function atualizarRolagem(){
     }
 }
 
+function openNav() {
+    document.getElementById("menu").style.width = "250px";
+    document.getElementById("principal").style.marginLeft = "250px";
+  }
+  
+  function closeNav() {
+    document.getElementById("menu").style.width = "0";
+    document.getElementById("principal").style.marginLeft= "0";
+  }
+
 $("#bate-papo").on('scroll', function() {
     rolado=true;
 });
@@ -24,7 +34,7 @@ function enviarMensagemAoAssistente() {
         mensagemDeTexto = '';
     else {
         // exibe a mensagem na tela
-        batePapo.innerHTML += '<p>Você -> ' + mensagemDeTexto + '</p>';
+        batePapo.innerHTML += '<p class = "voce">Você &#8594; ' + mensagemDeTexto + '</p>';
         atualizarRolagem();
     }
     
@@ -52,16 +62,17 @@ function enviarMensagemAoAssistente() {
                                 pedido: dadosRetornados.data.result.context.pedido,
                                 cliente: dadosRetornados.data.result.context.cliente,
                             },
-                            function (dadosRetornados, statusRequest) {
-                                if (dadosRetornados.status === 'OK') {
+                            function (dadosGuardados, statusRequest) {
+                                if (dadosGuardados.status === 'OK') {
                                     $.get("/cos/preco",
-                                        { pedido: dadosRetornados.data },
-                                        function (dadosRetornados, statusRequest) {
-                                            if (dadosRetornados.status === 'ERRO')
-                                                alert(dadosRetornados.data);
+                                        { pedido: dadosGuardados.data },
+                                        function (dadosPrecificados, statusRequest) {
+                                            if (dadosPrecificados.status === 'ERRO')
+                                                alert(dadosPrecificados.data);
                                             else {
-                                                batePapo.innerHTML += '<p>Laranjinha -> O valor do pedido é R$ ' + parseFloat(dadosRetornados.data).toFixed(2) + '</p>';
+                                                batePapo.innerHTML += '<p class = "laranjinha">Laranjinha &#8594; O valor do pedido é R$ ' + parseFloat(dadosPrecificados.data).toFixed(2) + '</p>';
                                                 atualizarRolagem();
+                                                menu.innerHTML += '<p class = "pedido">' + dadosRetornados.data.result.context.pedido + '<br>Preço: R$ ' + parseFloat(dadosPrecificados.data).toFixed(2) + '</p>';
                                             }
                                         }
                                     )
@@ -70,7 +81,7 @@ function enviarMensagemAoAssistente() {
                         );
                     }
                     else {
-                        batePapo.innerHTML += '<p>Laranjinha -> ' + elemento + '</p>';
+                        batePapo.innerHTML += '<p class = "laranjinha">Laranjinha &#8594; ' + elemento + '</p>';
                         atualizarRolagem();
                     }
                 });
