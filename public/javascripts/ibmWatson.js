@@ -12,11 +12,8 @@ function callback(response) {
 var initParams = {
     "appGUID":"30251d6a-8a76-49f9-ac4c-77c4db56791f",
     "appRegion":"us-south",
-    "clientSecret":"8235227e-f163-4b12-a1c6-46754f67bc04", 
-
-  
-
-
+    "clientSecret":"8235227e-f163-4b12-a1c6-46754f67bc04",
+    "pushVaribales":"empurrei",
 }
 bmsPush.initialize(initParams, callback)
 bmsPush.register(function(response){
