@@ -1,0 +1,7 @@
+{
+    "name": "Push Notifications IBM",
+    "gcm_sender_id": "533266594968" ,
+    "permissions":[
+        "storage"
+    ]
+}

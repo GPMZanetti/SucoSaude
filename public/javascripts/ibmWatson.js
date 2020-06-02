@@ -2,6 +2,28 @@
 var contextoDoDialogo = '{}';
 var rolado = false;
 
+
+function teste()
+{
+    var bmsPush = new BMSPush()
+function callback(response) {
+    alert(response.response)
+}
+var initParams = {
+    "appGUID":"30251d6a-8a76-49f9-ac4c-77c4db56791f",
+    "appRegion":"us-south",
+    "clientSecret":"8235227e-f163-4b12-a1c6-46754f67bc04", 
+
+  
+
+
+}
+bmsPush.initialize(initParams, callback)
+bmsPush.register(function(response){
+    alert(response.response)
+})
+}
+
 function atualizarRolagem(){
     if(!rolado){
         var elemento = document.getElementById("bate-papo");
