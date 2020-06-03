@@ -20,8 +20,8 @@ function iniciarNotificacoes()
 
     bmsPush.initialize(initParams, callback)
     bmsPush.register(function(resposta){
-        alert(resposta.response.deviceId);
-        idDispositivo = deviceId;
+        alert(JSON.parse(resposta.response).deviceId);
+        idDispositivo = resposta.response.deviceId;
     })
 }
 
