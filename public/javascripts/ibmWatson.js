@@ -14,8 +14,9 @@ var initParams = {
     "appRegion":"us-south",
     "clientSecret":"8235227e-f163-4b12-a1c6-46754f67bc04",
     "pushVaribales":"empurrei",
-    "applicationServerKey":"BBRgspRSzO4GhXdtUxJ4T0LGtiJ347EXKvuYf6QaNRLj3j09f9tD4i2jZeieao5GxQXqXVCxKkOgvENwYdpvpsc"
+    "applicationServerKey":"30251d6a-8a76-49f9-ac4c-77c4db56791f"
 }
+
 bmsPush.initialize(initParams, callback)
 bmsPush.register(function(response){
     alert(response.response)
