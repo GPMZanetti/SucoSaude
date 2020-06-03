@@ -1,26 +1,28 @@
 // variável para controlar o contexto do diálogo
 var contextoDoDialogo = '{}';
 var rolado = false;
+var idDispositivo = '';
 
 
-function teste()
+function iniciarNotificacoes()
 {
     var bmsPush = new BMSPush()
-function callback(response) {
-    alert(response.response)
-}
-var initParams = {
-    "appGUID":"30251d6a-8a76-49f9-ac4c-77c4db56791f",
-    "appRegion":"us-south",
-    "clientSecret":"8235227e-f163-4b12-a1c6-46754f67bc04",
-    "pushVaribales":"empurrei",
-    "applicationServerKey":"30251d6a-8a76-49f9-ac4c-77c4db56791f"
-}
+    function callback(response) {
+        alert(response.response)
+    }
+    var initParams = {
+        "appGUID":"30251d6a-8a76-49f9-ac4c-77c4db56791f",
+        "appRegion":"us-south",
+        "clientSecret":"8235227e-f163-4b12-a1c6-46754f67bc04",
+        "pushVaribales":"empurrei",
+        "applicationServerKey":"30251d6a-8a76-49f9-ac4c-77c4db56791f"
+    }
 
-bmsPush.initialize(initParams, callback)
-bmsPush.register(function(response){
-    alert(response.response)
-})
+    bmsPush.initialize(initParams, callback)
+    bmsPush.register(function(resposta){
+        alert(resposta.response.deviceId);
+        idDispositivo = deviceId;
+    })
 }
 
 function atualizarRolagem(){
@@ -33,12 +35,12 @@ function atualizarRolagem(){
 function openNav() {
     document.getElementById("menu").style.width = "250px";
     document.getElementById("principal").style.marginLeft = "250px";
-  }
+}
   
-  function closeNav() {
+function closeNav() {
     document.getElementById("menu").style.width = "0";
     document.getElementById("principal").style.marginLeft= "0";
-  }
+}
 
 $("#bate-papo").on('scroll', function() {
     rolado=true;
