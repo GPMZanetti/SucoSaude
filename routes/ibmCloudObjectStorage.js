@@ -37,7 +37,7 @@ roteador.post('/guardar', function (req, res, next) {
 
     var mensagem = ibmPushNotifications.PushMessageBuilder.Message.alert("O suco está pronto")
         .url("www.ibm.com").build();
-    var firefox = ibmPushNotifications.PushMessageBuilder.FirefoxWeb.title("IBM")
+    /*var firefox = ibmPushNotifications.PushMessageBuilder.FirefoxWeb.title("IBM")
         .iconUrl("http://www.iconsdb.com/icons/preview/purple/message-2-xxl.png")
         .timeToLive(1.0).payload({ "alert" : "O suco está pronto" }).build();
     var configuracoes = ibmPushNotifications.PushMessageBuilder.Settings.firefoxWeb(firefox).build();
@@ -46,7 +46,7 @@ roteador.post('/guardar', function (req, res, next) {
         console.log("Error: " + error);
         console.log("Response: " + JSON.stringify(response));
         console.log("Body: " + body);
-    });
+    });*/
     cos.enviarItem("bd-sucosaude-cos-standard", pedido.id + ".json", JSON.stringify(pedido));
 
     res.json({
