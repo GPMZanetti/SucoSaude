@@ -28,7 +28,12 @@ roteador.post('/guardar', function (req, res, next) {
         quantItens++;
     });
 
-    var notificacoesPush = new PushNotifications(PushNotifications.Region.US_SOUTH, "30251d6a-8a76-49f9-ac4c-77c4db56791f", "8235227e-f163-4b12-a1c6-46754f67bc04");
+    var notificacoesPush = new PushNotificationsApiKey(PushNotifications.Region.US_SOUTH, "30251d6a-8a76-49f9-ac4c-77c4db56791f", "-rMewhpqu3wmplNZDWm-I3B7AT7SNehhM8-jD6JdynqP");
+ 
+    // Get authtoken
+    notificacoesPush.getAuthToken(function(hastoken,token){
+        console.log(hastoken, token);
+    });
     var mensagem = PushMessageBuilder.Message.alert("O suco está pronto")
         .url("www.ibm.com").build();
     var firefox = PushMessageBuilder.FirefoxWeb.title("IBM")
