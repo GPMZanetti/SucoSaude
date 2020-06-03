@@ -1,5 +1,6 @@
 var express = require('express');
 var roteador = express.Router();
+var ibmPushNotifications = require('ibm-push-notifications');
 
 const cos = require("../lib/IBMCloudObjectStorage");
 
@@ -26,7 +27,21 @@ roteador.post('/guardar', function (req, res, next) {
 
         quantItens++;
     });
-    
+
+    var notificacoesPush = new PushNotifications(PushNotifications.Region.US_SOUTH, "30251d6a-8a76-49f9-ac4c-77c4db56791f", "8235227e-f163-4b12-a1c6-46754f67bc04");
+    var mensagem = PushMessageBuilder.Message.alert("O suco está pronto")
+        .url("www.ibm.com").build();
+    var firefox = PushMessageBuilder.FirefoxWeb.title("IBM")
+        .iconUrl("http://www.iconsdb.com/icons/preview/purple/message-2-xxl.png")
+        .timeToLive(1.0).payload({ "alert" : "O suco está pronto" }).build();
+    var configuracoes = PushMessageBuilder.Settings.firefoxWeb(firefox).build();
+    var exemploDeNotificacao =  Notification.message(mensagem).settings(configuracoes).build();
+    notificacoesPush.send(exemploDeNotificacao, function(error, response, body) {
+        console.log("Error: " + error);
+        console.log("Response: " + JSON.stringify(response));
+        console.log("Body: " + body);
+    });
+
     cos.enviarItem("bd-sucosaude-cos-standard", pedido.id + ".json", JSON.stringify(pedido));
 
     res.json({
