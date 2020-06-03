@@ -8,6 +8,7 @@ roteador.post('/guardar', function (req, res, next) {
     var pedido = {
         id: Math.floor(Math.random()*1000000000),
         cliente: req.body.cliente,
+        dispositivo: req.body.dispositivo,
         situacao: "fazendo",
         itens: [],
     }
@@ -28,7 +29,7 @@ roteador.post('/guardar', function (req, res, next) {
         quantItens++;
     });
 
-    console.log("1");
+    /*console.log("1");
     //var notificacoesPush = new ibmPushNotifications.PushNotificationsWithApiKey(ibmPushNotifications.PushNotifications.Region.US_SOUTH, "30251d6a-8a76-49f9-ac4c-77c4db56791f", "-rMewhpqu3wmplNZDWm-I3B7AT7SNehhM8-jD6JdynqP");
  
     var notificacoesPush = new ibmPushNotifications.PushNotifications(ibmPushNotifications.PushNotifications.Region.US_SOUTH, "30251d6a-8a76-49f9-ac4c-77c4db56791f", "8235227e-f163-4b12-a1c6-46754f67bc04");
@@ -39,7 +40,7 @@ roteador.post('/guardar', function (req, res, next) {
         console.log(hastoken, token);
     });*/
 
-    console.log("1");
+    /*console.log("1");
 
     var mensagem = ibmPushNotifications.PushMessageBuilder.Message.alert("O suco está pronto")
         .url("www.ibm.com").build();
@@ -57,7 +58,7 @@ roteador.post('/guardar', function (req, res, next) {
         console.log("Response: " + JSON.stringify(response));
         console.log("Body: " + body);
     });
-    console.log("1");
+    console.log("1");*/
     cos.enviarItem("bd-sucosaude-cos-standard", pedido.id + ".json", JSON.stringify(pedido));
 
     res.json({

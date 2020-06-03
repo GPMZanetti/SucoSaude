@@ -6,9 +6,9 @@ var idDispositivo = '';
 
 function iniciarNotificacoes()
 {
-    var bmsPush = new BMSPush()
+    var bmsPush = new BMSPush();
     function callback(response) {
-        alert(response.response)
+        alert(response.response);
     }
     var initParams = {
         "appGUID":"30251d6a-8a76-49f9-ac4c-77c4db56791f",
@@ -16,13 +16,12 @@ function iniciarNotificacoes()
         "clientSecret":"8235227e-f163-4b12-a1c6-46754f67bc04",
         "pushVaribales":"empurrei",
         "applicationServerKey":"30251d6a-8a76-49f9-ac4c-77c4db56791f"
-    }
+    };
 
-    bmsPush.initialize(initParams, callback)
+    bmsPush.initialize(initParams, callback);
     bmsPush.register(function(resposta){
-        alert(JSON.parse(resposta.response).deviceId);
-        idDispositivo = resposta.response.deviceId;
-    })
+        idDispositivo = JSON.parse(resposta.response).deviceId;
+    });
 }
 
 function atualizarRolagem(){
@@ -84,6 +83,7 @@ function enviarMensagemAoAssistente() {
                                 mensagem: elemento,
                                 pedido: dadosRetornados.data.result.context.pedido,
                                 cliente: dadosRetornados.data.result.context.cliente,
+                                dispositivo: idDispositivo,
                             },
                             function (dadosGuardados, statusRequest) {
                                 if (dadosGuardados.status === 'OK') {
