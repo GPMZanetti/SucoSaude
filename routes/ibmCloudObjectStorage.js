@@ -37,12 +37,12 @@ roteador.post('/guardar', function (req, res, next) {
 
     var mensagem = PushMessageBuilder.Message.alert("O suco está pronto")
         .url("www.ibm.com").build();
-    var firefox = PushMessageBuilder.FirefoxWeb.title("IBM")
+    /*var firefox = PushMessageBuilder.FirefoxWeb.title("IBM")
         .iconUrl("http://www.iconsdb.com/icons/preview/purple/message-2-xxl.png")
         .timeToLive(1.0).payload({ "alert" : "O suco está pronto" }).build();
     var configuracoes = PushMessageBuilder.Settings.firefoxWeb(firefox).build();
     var exemploDeNotificacao =  Notification.message(mensagem).settings(configuracoes).build();
-    /*notificacoesPush.send(exemploDeNotificacao, function(error, response, body) {
+    notificacoesPush.send(exemploDeNotificacao, function(error, response, body) {
         console.log("Error: " + error);
         console.log("Response: " + JSON.stringify(response));
         console.log("Body: " + body);
