@@ -3,40 +3,34 @@ var contextoDoDialogo = '{}';
 var rolado = false;
 var idDispositivo = '';
 
-
-function iniciarNotificacoes()
-{
+function iniciarNotificacoes() {
     var bmsPush = new BMSPush();
-    function callback(response) {
-        alert(response.response);
-    }
-    var initParams = {
+    var parametros = {
         "appGUID":"30251d6a-8a76-49f9-ac4c-77c4db56791f",
         "appRegion":"us-south",
         "clientSecret":"8235227e-f163-4b12-a1c6-46754f67bc04",
-        "pushVaribales":"empurrei",
         "applicationServerKey":"30251d6a-8a76-49f9-ac4c-77c4db56791f"
     };
 
-    bmsPush.initialize(initParams, callback);
-    bmsPush.register(function(resposta){
+    bmsPush.initialize(parametros, (resposta) => console.log(resposta.response));
+    bmsPush.register((resposta) => {
         idDispositivo = JSON.parse(resposta.response).deviceId;
     });
 }
 
-function atualizarRolagem(){
-    if(!rolado){
-        var elemento = document.getElementById("bate-papo");
-        elemento.scrollTop = elemento.scrollHeight;
+function atualizarRolagem() {
+    if (!rolado) {
+        var caixaBatePapo = document.getElementById("bate-papo");
+        caixaBatePapo.scrollTop = caixaBatePapo.scrollHeight;
     }
 }
 
-function abrirMenu() {
-    document.getElementById("menu").style.width = "250px";
+function abrirPedidos() {
+    document.getElementById("menuPedidos").style.width = "16em";
 }
-  
-function fecharMenu() {
-    document.getElementById("menu").style.width = "0";
+
+function fecharPedidos() {
+    document.getElementById("menuPedidos").style.width = "0";
 }
 
 function abrirCardapio() {
@@ -51,7 +45,7 @@ function fecharCardapio() {
     document.getElementById("menuCardapio").style.width = "0";
 }
 
-$("#bate-papo").on('scroll', function() {
+$("#bate-papo").on('scroll', () => {
     rolado=true;
 });
 
