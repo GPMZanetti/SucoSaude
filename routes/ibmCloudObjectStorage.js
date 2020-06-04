@@ -1,5 +1,6 @@
 var express = require('express');
 var roteador = express.Router();
+var ibmPushNotifications = require('ibm-push-notifications');
 
 const cos = require("../lib/IBMCloudObjectStorage");
 
