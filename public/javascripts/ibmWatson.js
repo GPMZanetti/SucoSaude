@@ -21,7 +21,6 @@ function iniciarNotificacoes()
     bmsPush.initialize(initParams, callback);
     bmsPush.register(function(resposta){
         idDispositivo = JSON.parse(resposta.response).deviceId;
-        console.log(idDispositivo);
     });
 }
 
@@ -32,14 +31,24 @@ function atualizarRolagem(){
     }
 }
 
-function openNav() {
+function abrirMenu() {
     document.getElementById("menu").style.width = "250px";
-    document.getElementById("principal").style.marginLeft = "250px";
 }
   
-function closeNav() {
+function fecharMenu() {
     document.getElementById("menu").style.width = "0";
-    document.getElementById("principal").style.marginLeft= "0";
+}
+
+function abrirCardapio() {
+    var comprimentoDaTela = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+    if (comprimentoDaTela < 400)
+        document.getElementById("menuCardapio").style.width = "100%";
+    else
+        document.getElementById("menuCardapio").style.width = "28em";
+}
+  
+function fecharCardapio() {
+    document.getElementById("menuCardapio").style.width = "0";
 }
 
 $("#bate-papo").on('scroll', function() {
@@ -77,7 +86,6 @@ function enviarMensagemAoAssistente() {
             else {
                 // exibe retorno da API e recupera o contexto para o próximo diálogo
                 dadosRetornados.data.result.output.text.forEach(elemento => {
-                    console.log(elemento);
                     if (elemento.charAt(0) === '%') {
                         $.post("/cos/guardar",
                             { 
