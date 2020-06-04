@@ -4,6 +4,7 @@ var roteador = express.Router();
 const cos = require("../lib/IBMCloudObjectStorage");
 
 roteador.post('/guardar', function (req, res, next) {
+    res.setHeader("Access-Control-Allow-Origin", "*");
     var pedido = {
         id: Math.floor(Math.random()*1000000000),
         cliente: req.body.cliente,
@@ -37,6 +38,7 @@ roteador.post('/guardar', function (req, res, next) {
 });
 
 roteador.get('/preco', function (req, res, next) {
+    res.setHeader("Access-Control-Allow-Origin", "*");
     var pedido = req.query.pedido;
     var arquivo;
     var preco = 0;

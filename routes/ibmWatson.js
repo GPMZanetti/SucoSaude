@@ -7,6 +7,7 @@ const idHabilidade = 'caa2f366-79b5-432f-8152-8569d6195d99';
 
 // post para o serviço: IBM Watson Assistant
 roteador.post('/assistente', function (req, res, next) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
   // recupera mensagem de texto e contexto da conversa
   var { texto, contextoDoDialogo } = req.body;
   contexto = JSON.parse(contextoDoDialogo);
