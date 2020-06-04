@@ -8,7 +8,7 @@ function iniciarNotificacoes()
 {
     var bmsPush = new BMSPush();
     function callback(response) {
-        alert(response.response);
+        console.log(response.response);
     }
     var initParams = {
         "appGUID":"30251d6a-8a76-49f9-ac4c-77c4db56791f",
