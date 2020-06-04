@@ -9,11 +9,12 @@ body {
 }
 
 section#assistente {
-  padding: 50px;
-  width: 50%;
+  padding-top: 5%;
+  padding-left: 10%;
+  padding-right: 10%;
   height: 90%;
   text-align: center;
-  float: left;
+  float: center;
 }
 
 section#bate-papo {
@@ -38,18 +39,26 @@ input.texto {
   min-width: 50px;
 }
 
-aside#cardapio {
-  position: relative;
-  float: right;
-  margin-top: 0px;
-  height: 100%;
+@media screen and (min-width: 400px) {
+  img#imagemCardapio {
+    height: 42em;
+  }
 }
 
-img#imagemCardapio {
-  height: 190%;
+@media screen and (max-width: 400px) {
+  img#imagemCardapio {
+    width: 100%;
+  }
+
+  direito {
+    width: 100%;
+  }
 }
 
 section#pedidos{
+  position: absolute;
+  top: 1%;
+  left: 1%;
   float: left;
   border-color: orangered;
   border-width: 3px;
@@ -58,28 +67,47 @@ section#pedidos{
   background-color: white;
 }
 
-button#mostraPedido {
+aside#cardapio{
+  position: absolute;
+  top: 1%;
+  right: 1%;
+  float: right;
+  border-color: orangered;
+  border-width: 3px;
+  border-style: solid;
+  border-radius: 20px;
+  background-color: white;
+}
+
+button#mostra {
   border-radius: inherit;
-  font-size: 2em;
+  font-size: 1.5em;
   cursor: pointer;
   border-style: solid;
   background-color: inherit;
 }
 
-.sidenav {
+.menu {
   height: 100%;
   width: 0;
   position: fixed;
   z-index: 1;
   top: 0;
-  left: 0;
   background-color: whitesmoke;
   overflow-x: hidden;
   transition: 0.5s;
-  padding-top: 60px;
+  padding-top: 3.75em;
 }
 
-.sidenav a {
+.esquerdo {
+  left: 0;
+}
+
+.direito {
+  right: 0;
+}
+
+.menu a {
   padding: 8px 8px 8px 32px;
   text-decoration: none;
   font-size: 25px;
@@ -88,11 +116,11 @@ button#mostraPedido {
   transition: 0.3s;
 }
 
-.sidenav a:hover {
+.menu a:hover {
   color: orangered;
 }
 
-.sidenav .closebtn {
+.menu .botaoFechar {
   position: absolute;
   top: 0;
   right: 25px;

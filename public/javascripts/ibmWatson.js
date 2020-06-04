@@ -1,25 +1,51 @@
 // variável para controlar o contexto do diálogo
 var contextoDoDialogo = '{}';
 var rolado = false;
+var idDispositivo = '';
 
-function atualizarRolagem(){
-    if(!rolado){
-        var elemento = document.getElementById("bate-papo");
-        elemento.scrollTop = elemento.scrollHeight;
+function iniciarNotificacoes() {
+    var bmsPush = new BMSPush();
+    var parametros = {
+        "appGUID":"30251d6a-8a76-49f9-ac4c-77c4db56791f",
+        "appRegion":"us-south",
+        "clientSecret":"8235227e-f163-4b12-a1c6-46754f67bc04",
+        "applicationServerKey":"30251d6a-8a76-49f9-ac4c-77c4db56791f"
+    };
+
+    bmsPush.initialize(parametros, (resposta) => console.log(resposta.response));
+    bmsPush.register((resposta) => {
+        idDispositivo = JSON.parse(resposta.response).deviceId;
+    });
+}
+
+function atualizarRolagem() {
+    if (!rolado) {
+        var caixaBatePapo = document.getElementById("bate-papo");
+        caixaBatePapo.scrollTop = caixaBatePapo.scrollHeight;
     }
 }
 
-function openNav() {
-    document.getElementById("menu").style.width = "250px";
-    document.getElementById("principal").style.marginLeft = "250px";
-  }
-  
-  function closeNav() {
-    document.getElementById("menu").style.width = "0";
-    document.getElementById("principal").style.marginLeft= "0";
-  }
+function abrirPedidos() {
+    document.getElementById("menuPedidos").style.width = "16em";
+}
 
-$("#bate-papo").on('scroll', function() {
+function fecharPedidos() {
+    document.getElementById("menuPedidos").style.width = "0";
+}
+
+function abrirCardapio() {
+    var comprimentoDaTela = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+    if (comprimentoDaTela < 400)
+        document.getElementById("menuCardapio").style.width = "100%";
+    else
+        document.getElementById("menuCardapio").style.width = "28em";
+}
+  
+function fecharCardapio() {
+    document.getElementById("menuCardapio").style.width = "0";
+}
+
+$("#bate-papo").on('scroll', () => {
     rolado=true;
 });
 
@@ -56,10 +82,11 @@ function enviarMensagemAoAssistente() {
                 dadosRetornados.data.result.output.text.forEach(elemento => {
                     if (elemento.charAt(0) === '%') {
                         $.post("/cos/guardar",
-                            { 
+                            {
                                 mensagem: elemento,
                                 pedido: dadosRetornados.data.result.context.pedido,
                                 cliente: dadosRetornados.data.result.context.cliente,
+                                dispositivo: idDispositivo,
                             },
                             function (dadosGuardados, statusRequest) {
                                 if (dadosGuardados.status === 'OK') {

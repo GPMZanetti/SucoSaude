@@ -7,6 +7,7 @@ roteador.post('/guardar', function (req, res, next) {
     var pedido = {
         id: Math.floor(Math.random()*1000000000),
         cliente: req.body.cliente,
+        dispositivo: req.body.dispositivo,
         situacao: "fazendo",
         itens: [],
     }
@@ -26,7 +27,7 @@ roteador.post('/guardar', function (req, res, next) {
 
         quantItens++;
     });
-    
+
     cos.enviarItem("bd-sucosaude-cos-standard", pedido.id + ".json", JSON.stringify(pedido));
 
     res.json({

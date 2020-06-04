@@ -6,18 +6,20 @@
         <title>SucoSaúde - Atendimento</title>
         <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src = "/javascripts/ibmWatson.js"></script>
+        <script src = "/javascripts/BMSPushSDK.js" async></script>
+        <link rel = "manifest" href = "manifest.json">
         <link rel = "stylesheet" type="text/css" href="stylesheets/estilo.css"  title="Estilo 1">
         <link rel="shortcut icon" type="image/png" href="/images/favicon.ico"/>
     </head>
 
-    <body>
+    <body onload="iniciarNotificacoes();">
         <section id = "pedidos">
-            <div id = "menu" class = "sidenav">
-                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <div id = "menuPedidos" class = "menu esquerdo">
+                <a href = "javascript:void(0)" class = "botaoFechar" onclick = "fecharPedidos()">&times;</a>
                 <h2>Meus pedidos</h2>
             </div>
 
-            <button id = "mostraPedido" onclick="openNav()">&#129380; Pedidos</button>
+            <button id = "mostra" onclick = "abrirPedidos()">&#129380; Pedidos</button>
         </section>
 
         <section id = "principal">
@@ -31,11 +33,17 @@
                     <input id = "botaoEnviar" class="botão" type = "button" onclick = "enviarMensagemAoAssistente();" value = "Enviar" />
                 </form>
             </section>
-
-            <aside id = "cardapio">
-                <img id = "imagemCardapio" src = "images/cardapio.png" alt = "Cardápio SucoSaúde" />
-            </aside>
         </section>
+        
+        <aside id = "cardapio">
+            <div id = "menuCardapio" class = "menu direito">
+                <a href = "javascript:void(0)" class = "botaoFechar" onclick = "fecharCardapio()">&times;</a>
+                <img id = "imagemCardapio" src = "images/cardapio.png" alt = "Cardápio SucoSaúde" />
+            </div>
+
+            <button id = "mostra" onclick="abrirCardapio()">&#128203; Cardápio</button>
+        </aside>
+
 
     </body>
 </html>
