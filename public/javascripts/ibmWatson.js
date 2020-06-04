@@ -82,7 +82,7 @@ function enviarMensagemAoAssistente() {
                 dadosRetornados.data.result.output.text.forEach(elemento => {
                     if (elemento.charAt(0) === '%') {
                         $.post("/cos/guardar",
-                            {
+                            { 
                                 mensagem: elemento,
                                 pedido: dadosRetornados.data.result.context.pedido,
                                 cliente: dadosRetornados.data.result.context.cliente,
