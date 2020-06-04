@@ -21,6 +21,7 @@ function iniciarNotificacoes()
     bmsPush.initialize(initParams, callback);
     bmsPush.register(function(resposta){
         idDispositivo = JSON.parse(resposta.response).deviceId;
+        console.log(idDispositivo);
     });
 }
 
