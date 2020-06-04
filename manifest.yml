@@ -3,6 +3,6 @@ applications:
   memory: 256M
   instances: 1
   domain: herokuapp.com
-  name: sucosaude
-  host: sucosaude
+  name: sucosaudeteste
+  host: sucosaudeteste
   disk_quota: 1024M
